@@ -8,66 +8,32 @@
   --accent-color: #FF0070;
   --main-font: 'IBM Plex Mono';
   --background-image: url(../images/cover-image-dark.png);
-  /* --background-cover-image: url(../images/cover-image.png); */
   --hover-color: #FF007066;
   --heading-color: #DB00FF;
   --title-decor-color: #000028;
-  --title-decor-background: #FF0070;
   --content-text-color: #F1B2CE;
-  --text-shadow-color: #FF0070;
+  --text-shadow-color: #FF0070;  
+  /* --background-cover-image: url(../images/cover-image.png); */
+  /* пробовал всяко разно прикручивать этот 3й рисунок с разной прозрачностью
+   и отдельно, но с ним идёт заметное расхождение с макетом.
+   Так и не понял, куда он и зачем. */
+  /* .header__decoration-item {
+    display: inline-block;
+  } */
 }
+
+
 
 .page.theme_dark {
   /* сохраните этот селектор в приведённом виде.
     Так стили написанные ниже будут иметь больший вес,
     чем стили в медиазапросе предпочтений пользователя
-  */
-  inline-size: 100vi;  
-  background-image: var(--background-image);
-  background-size: cover;
-  background-position: center; 
-  background-attachment: fixed;
-  font-family: var(--main-font, sans-serif);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  position: relative;
-  z-index: -1;
-}
-
-.header__decoration-item {
-  position: absolute;  
-  inset-block-start: 10px;
-  inset-inline-end: 18px;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 25px;   
-  color: var(--accent-color);
-}
-
-.header__decoration-item::after {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;   
-  width: 9px;
-  height: 9px;
-  margin-inline-start: 10px;
-  margin-block-start: -4px;
-  border-radius: 50%;
-  background-color: var(--accent-color);
-  box-shadow: 0px 0px 4px 2px var(--accent-color);
+  */  
 }
 
 @media (min-width: 768px) {
   .header__decoration-item {
     inset-block-start: 20px;
     inset-inline-end: 28px;
-  }
-
-  .page.theme_dark {
-    gap: 60px;
-  } 
+  }  
 }

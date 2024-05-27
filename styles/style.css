@@ -2,7 +2,7 @@
 
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
-  inline-size: 100vi;  
+  max-inline-size: 1440px;  
   background-image: var(--background-image);
   background-size: cover;
   background-position: center; 
@@ -30,15 +30,38 @@
   z-index: 0;
 } */
 
+.header__decoration-item {
+  position: absolute;  
+  inset-block-start: 10px;
+  inset-inline-end: 18px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;   
+  color: var(--accent-color);
+}
+
+.header__decoration-item::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;   
+  width: 9px;
+  height: 9px;
+  margin-inline-start: 10px;
+  margin-block-start: -4px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  box-shadow: 0px 0px 4px 2px var(--accent-color);
+}
+
 .header {  
-  inline-size: 100vi;
+  inline-size: 100%;
   block-size: max(100vb, 668px);
   padding: 20px 10px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   align-items: center;
-  justify-content: center;
   position: relative;   
   z-index: 1;
 }
@@ -88,7 +111,8 @@
   outline: none;
   border: none;
   block-size: 26px;
-  padding: 0 13px 0 13px;  
+  padding: 0 13px 0 13px;
+  transition: .5s;  
 }
 
 .header__theme-menu-button_active {
@@ -107,31 +131,31 @@
 }
 
 .header__theme-menu-button:hover {  
-  border: 1px solid var(--hover-color);  
+  border: 1px solid var(--hover-color); 
+  cursor: pointer; 
 }
 
 .heading {  
   font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
   font-weight: 700;
   line-height: 95.7px;
-  text-align: inline-start;  
   color: var(--heading-color);
   text-shadow: 4px 4px 0 var(--text-shadow-color);  
 }
 
-.title-decor {  
+.title-decor { 
+  inline-size: 100%; 
   justify-self: end;   
   font-size: 18px;
   font-weight: 700;
-  line-height: 23.4px;
-  text-align: inline-start;
+  line-height: 23.4px;  
   color: var(--title-decor-color);
-  background-color: var(--title-decor-background);  
-  overflow: auto;
+  background-color: var(--text-shadow-color);
+  overflow: auto;  
 }
 
 .content {
-  inline-size: 100vi;
+  inline-size: 100%;
   position: relative;
   z-index: 1;
   display: grid;
@@ -141,8 +165,7 @@
   padding: 0 10px;
 }
 
-.content__section {
-  /* inline-size: 100vi; */
+.section {
   position:relative;
   z-index: 1;
   display: grid;
@@ -151,7 +174,7 @@
   gap: 20px;
 }
 
-.content__section-title {
+.section-title {
   font-size: 18px;
   font-weight: 700;
   line-height: 23.4px;
@@ -159,13 +182,17 @@
   color: var(--accent-color);
 }
 
-.content__text-block {
+.section__text-block {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.content__text {
+.text-block-title-advice {
+  font-weight: 400;  
+}
+
+.section__text {
   font-size: 18px;
   font-weight: 400;
   line-height: 23.4px;
@@ -190,11 +217,7 @@ a:focus-visible {
   outline: 1px solid currentColor;
 }
 
-.title-decor-picture {
-  inline-size: 100%;
-}
-
-.content__picture-block {
+.section__gallery {
   gap: 10px;
 }
 
@@ -202,13 +225,14 @@ a:focus-visible {
   display: inline-block;
   object-fit: cover;
   object-position: center;
-  inline-size: calc(100vi - 20px);  
+  inline-size: 100%;
+  block-size: 100%;  
 }
 
 .footer {
   display: flex;
   position: relative;
-  inline-size: 100vi;
+  inline-size: 100%;
   block-size: max(100vb, 668px);
   justify-content: center;
   align-items: center;  
@@ -228,6 +252,7 @@ a:focus-visible {
   }
 
   .header {
+    block-size: max(100vb, 1024px);
     padding: 105px 20px 105px 0px;
   }
   
@@ -241,20 +266,14 @@ a:focus-visible {
     inset-inline-start: 20px;
   }
 
-  .header__theme-menu {    
-    align-self: center;
-  }
-
   .heading {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
     line-height: 99px;
     justify-self: start;
   }
 
-  .title-decor { 
-    /* inline-size: clamp(355px, 100vi, 364px); */
-    inline-size: calc(100vi / 2 - 20px);    
-    align-self: center;
+  .header__title-decor {
+    max-inline-size: calc((100% - 20px) / 2);
   }
 
   .content {
@@ -262,83 +281,89 @@ a:focus-visible {
     padding: 0 20px;
   } 
 
-  .content__section_about {  
+  .section-why {  
     block-size: minmax (min-content, max-content);
     grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(2, 1fr);    
   }
 
-  .content__section-title-about {
+  .section-title-why {
     grid-row-start: 1;
     grid-row-end: span 2;
   }
 
-  .text-block-title {
-    inline-size: 100%;
+  .section__text-block-why {
+    grid-column-start: 2;
   }
 
-  .content__section-title-reason {    
+  .section__title-causes {    
     max-inline-size: 30%;
   }
 
-  .content__section-advice {
+  .section-advices {
+    /* grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto, minmax(min-content, max-content)); */
+    /* Если делаю 3 столбца, то это позволяет не дублировать стили для разрешения 1024,
+     но не совпадает с макетом. Пришлось сделать 2 столбца,
+      хотя, мне это и видется лишним действием...
+    Верстал секции Гридами, а не карточками из-за настойчивых рекомендаций в проекте.
+    */
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: repeat(6, minmax(min-content, max-content));
+    grid-template-rows: repeat(6, auto);
   }
 
-  .content__section-advice-title {
+  .section-advices-title {
     grid-row-start: 1;
     grid-row-end: span 6;
   }
 
-  .title-decor-advice {
-    inline-size: 100%;
+  .section__text-block-advice {
+    grid-column-start: 2;
   }
 
-  .title-decor-picture {
-    inline-size: 100%;
-    grid-area: title-decor-picture;   
+  .title-decor-gallery {
+    grid-column-start: 1;
+    grid-column-end: span 3;
   }
 
   .image-sunset {
-    grid-area: image-sunset;
-    inline-size: 479px;
-    block-size: 192px;     
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 2;   
   }
 
   .image-icecream {
-    grid-area: image-icecream;
-    inline-size: 229px;
-    block-size: 441px;
+    grid-column-start: 3;
+    grid-row-start: 2;
+    grid-row-end: span 2;
   }
 
   .image-tape {
-    grid-area: image-tape;
-    inline-size: 229px;
-    block-size: 568px;
+    grid-column-start: 1;    
+    grid-row-start: 3;
+    grid-row-end: span 2;
   }
 
   .image-books {
-    grid-area: image-books;
-    inline-size: 230px;
-    block-size: 230px;
+    grid-column-start: 2;
+    grid-row-start: 3;
   }
 
   .image-street {
-    grid-area: image-street;
-    inline-size: 479px;
-    block-size: 318px;    
+    grid-column-start: 2;
+    grid-column-end: span 2;
+    grid-row-start: 4; 
   }
 
-  .content__picture-block {    
-    grid-template-columns: repeat(3, auto);
+  .section__gallery { 
+    display: grid;   
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, auto);
     gap: 20px;
-    grid-template-areas: 
-    "title-decor-picture title-decor-picture title-decor-picture"
-    "image-sunset image-sunset image-icecream"
-    "image-tape image-books image-icecream"
-    "image-tape image-street image-street";
+  }
+
+  .footer {
+    block-size: max(100vb, 1024px);
   }
 
   .footer__title {
@@ -347,12 +372,9 @@ a:focus-visible {
 }
 
 @media (min-width: 1024px) {
-  .page {
-    gap: 60px;
-  }
-
-  .header {
-    padding: 20px 20px 55px 0px;    
+    .header {
+      block-size: max(100vb, 768px);
+      padding: 20px 20px 55px 0px;    
   }
 
   .header__theme-menu {
@@ -362,88 +384,52 @@ a:focus-visible {
   }
 
   .header__theme-menu-list {
-    display: flex;
     flex-direction: row;
-    gap: 10px;    
   }
 
   .heading {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
     line-height: 129.53px;
-    justify-self: start;
     padding-block-start: 35px;    
   }
 
-  .content__section_about {  
-    block-size: minmax (min-content, max-content);
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);    
-  }
-
-  .content__text-block-about {
-    grid-column-start: 2;
+  .section__text-block-why {
     grid-column-end: span 2;
   }
-
-  .content__section-title-about {
-    grid-row-start: 1;
-    grid-row-end: span 2;
-  }
-
-  .content__section_reason {
-    grid-template-rows: repeat(2, auto);
+  
+  .section-causes {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
     grid-auto-flow: column;
+    grid-auto-columns: 1fr;
   }
 
-  .content__section-title-reason {    
+  .section__title-causes {
     grid-column-start: 1;
     grid-column-end: span 3;
   }
 
-  .content__section-advice {
+  .section__text-block-causes {
+    grid-row-start: 2;
+    grid-row-end: span 2;
+  }
+  
+  .section-advices {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(6, minmax(min-content, max-content));
   }
-
-  .content__section-advice-title {
-    grid-row-start: 1;
-    grid-row-end: span 6;
-  }
-
-  .content__text-block-advice {
-    grid-column-start: 2;
-    grid-column-end: span 2;
-  }
  
   .title-decor-advice {
-    inline-size: 100%; 
     grid-column-start: 2;
     grid-column-end: span 2;
   }
 
-   .image-sunset {    
-    inline-size: 649px;
-    block-size: 260px;     
+  .section__text-block-advice {
+    grid-column-start: 2;
+    grid-column-end: span 2;
   }
 
-  .image-icecream {    
-    inline-size: 315px;
-    block-size: 595px;
-  }
-
-  .image-tape {
-    inline-size: 315px;
-    block-size: 768px;
-  }
-
-  .image-books {
-    inline-size: 315px;
-    block-size: 315px;
-  }
-
-  .image-street {
-    inline-size: 649px;
-    block-size: 428px;    
+  .footer {
+    block-size: max(100vb, 768px);
   }
 }  
