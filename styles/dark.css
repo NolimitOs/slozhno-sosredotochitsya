@@ -8,6 +8,7 @@
   --accent-color: #FF0070;
   --main-font: 'IBM Plex Mono';
   --background-image: url(../images/cover-image-dark.png);
+  --background-color: #00183F;
   --hover-color: #FF007066;
   --heading-color: #DB00FF;
   --title-decor-color: #000028;
@@ -22,18 +23,22 @@
   } */
 }
 
-
-
 .page.theme_dark {
   /* сохраните этот селектор в приведённом виде.
     Так стили написанные ниже будут иметь больший вес,
     чем стили в медиазапросе предпочтений пользователя
   */  
-}
-
-@media (min-width: 768px) {
+  --accent-color: #FF0070;
+  --main-font: 'IBM Plex Mono';
+  --background-image: url(../images/cover-image-dark.png);
+  --background-color: #00183F;
+  --hover-color: #FF007066;
+  --heading-color: #DB00FF;
+  --title-decor-color: #000028;
+  --content-text-color: #F1B2CE;
+  --text-shadow-color: #FF0070; 
   .header__decoration-item {
-    inset-block-start: 20px;
-    inset-inline-end: 28px;
-  }  
+    display: inline-block;
+  }
+
 }
